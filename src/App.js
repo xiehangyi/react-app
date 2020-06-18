@@ -2,33 +2,15 @@ import React from 'react';
 
 // import { Button } from 'antd'
 
-import Sider from './Router/router'
+import Sider from './router/router'
 
 import 'antd/dist/antd.less';
 import './App.less';
 
-const parent = [
-  {name: 'settings', key: 'settings', children: []}
-]
-
-const children = [
-  {
-    name: 'About',
-    key: 'about',
-    path: '/about',
-    parent: 'settings'
-  },
-  {
-    name: 'Home',
-    key: 'home',
-    path: '/home',
-    parent: 'settings'
-  }
-]
 
 const App = () => (
   <div className="App">
-    <Sider children={children} parent={parent} />
+    <Sider />
   </div>
 )
 

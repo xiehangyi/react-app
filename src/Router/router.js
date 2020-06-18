@@ -9,8 +9,27 @@ import {
   // withRouter
 } from 'react-router-dom'
 import { createBrowserHistory } from 'history';
-import Home from '../Home/home'
-import About from '../About/about'
+import Home from '../views/Home/home'
+import About from '../views/About/about'
+
+const parent = [
+  {name: 'settings', key: 'settings', children: []}
+]
+
+const children = [
+  {
+    name: 'About',
+    key: 'about',
+    path: '/about',
+    parent: 'settings'
+  },
+  {
+    name: 'Home',
+    key: 'home',
+    path: '/home',
+    parent: 'settings'
+  }
+]
 
 const { SubMenu } = Menu;
 
@@ -24,13 +43,13 @@ class Sider extends React.Component {
     let history = createBrowserHistory() // 创建历史对象
     let pathname = history.location.pathname
     console.log(pathname)
-    let path = this.props.parent.slice()
-    this.props.children.map(item =>
+    let path = parent.slice()
+    children.map(item =>
       path.find(one => one.key === item.parent).children.push(item)
     )
     let defaultOpenKeys = []
     let defaultSelectedKeys = []
-    this.props.children.map(item => {
+    children.map(item => {
       if (item.path === pathname) {
         defaultOpenKeys = [item.parent]
         defaultSelectedKeys = [item.key]

@@ -1,0 +1,34 @@
+// Redux Store
+const createStore = (reducer, defaultState) => {
+  let state;
+  let listeners = [];
+
+  const getState = () => state;
+
+  const dispatch = (action) => {
+    state = reducer(state, action);
+    listeners.forEach(listener => listener());
+  };
+
+  const subscribe = (listener) => {
+    listeners.push(listener);
+    return () => {
+      listeners = listeners.filter(l => l !== listener);
+    }
+  };
+
+  dispatch({});
+
+  return { getState, dispatch, subscribe };
+  // getState获取当前State, State是个对象或者数组
+  // dispatch触发action改变State
+  // subscribe用于监听State的变化
+};
+
+// 一个State就是一个页面的当前状态，state固定，View就是唯一的模样
+// Store是所有状态State的集合
+// 通过改变State触发View改变
+// reducer是函数，表示处理actions的函数
+// actions表示用户通过View触发页面改变的动作
+// defaultState表示初始化状态State
+const store = createStore(reducer, defaultState)
