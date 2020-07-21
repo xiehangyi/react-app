@@ -9,29 +9,23 @@ import {
   // withRouter
 } from 'react-router-dom'
 import { createBrowserHistory } from 'history';
+
+import { parent, children } from './menu'
 import Home from '../views/Home/home'
 import About from '../views/About/about'
 
-const parent = [
-  {name: 'settings', key: 'settings', children: []}
-]
-
-const children = [
-  {
-    name: 'About',
-    key: 'about',
-    path: '/about',
-    parent: 'settings'
-  },
-  {
-    name: 'Home',
-    key: 'home',
-    path: '/home',
-    parent: 'settings'
-  }
-]
+import { connect } from 'react-redux'
+import { addNameCreater, addAgeCreater, addNameAsync } from '../redux/actions'
 
 const { SubMenu } = Menu;
+
+const AppHome = connect(
+  state => ({
+    lastname: state.addName,
+    lastage: state.addAge
+  }),
+  {addNameCreater, addAgeCreater, addNameAsync}
+)(Home)
 
 class Sider extends React.Component {
   constructor (props) {
@@ -102,7 +96,7 @@ class Sider extends React.Component {
         <div className="container">
           <Switch>
             <Route path="/home">
-              <Home />
+              <AppHome />
             </Route>
             <Route path="/about">
               <About />

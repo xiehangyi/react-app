@@ -25,7 +25,7 @@ const createStore = (reducer, defaultState) => {
   // subscribe用于监听State的变化
 };
 
-// 一个State就是一个页面的当前状态，state固定，View就是唯一的模样
+// 一个State就是一个页面的当前状态，State固定，View就是唯一的模样
 // Store是所有状态State的集合
 // 通过改变State触发View改变
 // reducer是函数，表示处理actions的函数
